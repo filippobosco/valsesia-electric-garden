@@ -1,0 +1,122 @@
+---
+const links = [
+	{ href: "#storia", label: "Storia" },
+	{ href: "#offerta", label: "Sede & tour" },
+	{ href: "#elettrico", label: "Perché elettrico" },
+	{ href: "#flow", label: "Flow Park" },
+	{ href: "#azioni", label: "Galleria" },
+	{ href: "#contatti", label: "Contatti" },
+];
+---
+
+<header
+	id="main-nav"
+	data-nav-state="hero"
+	class="sticky top-0 z-50 border-b border-transparent transition-[background,box-shadow,border-color] duration-300"
+>
+	<div class="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 md:px-8 md:py-4">
+		<a href="/" class="group relative flex shrink-0 items-center">
+			<span
+				class="relative inline-block max-w-[min(110px,calc(100vw-8rem))] sm:max-w-[116px] md:max-w-[124px]"
+			>
+				<img
+					src="/images/logo_bianco.png"
+					alt="Valsesia Electric Green"
+					width="828"
+					height="214"
+					loading="eager"
+					decoding="async"
+					class="nav-logo-img nav-logo-img--hero block h-auto w-full max-w-full object-contain object-left"
+				/>
+				<img
+					src="/images/logo_verde.png"
+					alt=""
+					width="820"
+					height="212"
+					loading="eager"
+					decoding="async"
+					class="nav-logo-img nav-logo-img--solid absolute left-0 top-0 block h-auto w-full max-w-full object-contain object-left"
+				/>
+			</span>
+		</a>
+
+		<button
+			type="button"
+			id="nav-toggle"
+			class="inline-flex h-11 w-11 items-center justify-center rounded-full border shadow-sm transition-colors md:hidden"
+			aria-expanded="false"
+			aria-controls="nav-menu"
+			aria-label="Apri menu"
+		>
+			<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"
+				></path>
+			</svg>
+		</button>
+
+		<div
+			id="nav-menu"
+			class="absolute left-0 right-0 top-full hidden flex flex-col gap-0 border-b px-5 py-4 md:static md:flex md:flex-row md:items-center md:gap-1 md:border-0 md:p-0"
+		>
+			{
+				links.map((l) => (
+					<a
+						href={l.href}
+						class="nav-link rounded-full px-3 py-2.5 text-sm font-medium transition md:py-2"
+					>
+						{l.label}
+					</a>
+				))
+			}
+			<a
+				href="#contatti"
+				class="mt-3 inline-flex items-center justify-center rounded-full bg-[#18b24b] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#18b24b]/25 transition hover:bg-[#0e7a30] md:ml-3 md:mt-0 md:py-2.5"
+			>
+				Prenota un tour
+			</a>
+		</div>
+	</div>
+</header>
+
+<script is:inline>
+	(function () {
+		const nav = document.getElementById("main-nav");
+		const toggle = document.getElementById("nav-toggle");
+		const menu = document.getElementById("nav-menu");
+
+		function updateNavFromHero() {
+			const hero = document.getElementById("hero");
+			if (!nav) return;
+			if (!hero) {
+				nav.dataset.navState = "solid";
+				return;
+			}
+			var past = hero.getBoundingClientRect().bottom <= 0;
+			nav.dataset.navState = past ? "solid" : "hero";
+		}
+		window.addEventListener("scroll", updateNavFromHero, { passive: true });
+		window.addEventListener("resize", updateNavFromHero, { passive: true });
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", updateNavFromHero);
+		} else {
+			updateNavFromHero();
+		}
+
+		if (toggle && menu) {
+			toggle.addEventListener("click", () => {
+				const added = menu.classList.toggle("hidden");
+				toggle.setAttribute("aria-expanded", String(!added));
+				toggle.setAttribute("aria-label", added ? "Apri menu" : "Chiudi menu");
+			});
+			menu.querySelectorAll('a[href^="#"]').forEach((link) => {
+				link.addEventListener("click", () => {
+					if (window.matchMedia("(max-width: 767px)").matches) {
+						menu.classList.add("hidden");
+						toggle.setAttribute("aria-expanded", "false");
+						toggle.setAttribute("aria-label", "Apri menu");
+					}
+				});
+			});
+		}
+	})();
+</script>

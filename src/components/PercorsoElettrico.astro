@@ -1,0 +1,66 @@
+---
+import Icon from "./Icon.astro";
+import type { IconName } from "../icon-names";
+
+const pillars: { n: string; icon: IconName; title: string; text: string }[] = [
+	{
+		n: "01",
+		icon: "leaf",
+		title: "Zero emissioni",
+		text: "Rispettiamo l’ambiente: zero CO₂, zero impatto chimico sul territorio che amiamo.",
+	},
+	{
+		n: "02",
+		icon: "volume-x",
+		title: "Silenziosa",
+		text: "Non spaventa la fauna: l’esperienza è più autentica e rispettosa.",
+	},
+	{
+		n: "03",
+		icon: "wrench",
+		title: "Manutenzione minima",
+		text: "Più semplice da guidare, meno fermi tecnici, più tempo in sella.",
+	},
+];
+---
+
+<section id="elettrico" class="scroll-mt-28 relative py-24 md:py-32">
+	<div
+		class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#18b24b]/40 to-transparent"
+		aria-hidden="true"
+	>
+	</div>
+
+	<div class="mx-auto max-w-7xl px-5 md:px-8">
+		<div class="mx-auto max-w-2xl text-center" data-animate>
+			<p class="text-xs font-semibold uppercase tracking-[0.3em] text-[#18b24b]">Perché l’elettrico</p>
+			<h2 class="mt-4 text-3xl font-bold tracking-tight text-[#2c2c2c] md:text-4xl">
+				Perché scegliere una moto elettrica?
+			</h2>
+		</div>
+
+		<div class="mt-16 grid gap-6 md:grid-cols-3 md:gap-8">
+			{
+				pillars.map((p) => (
+					<div
+						class="relative overflow-hidden rounded-[2rem] bg-white p-8 shadow-[0_25px_60px_-30px_rgba(0,0,0,0.14)] ring-1 ring-black/[0.06] transition hover:shadow-[0_28px_70px_-28px_rgba(0,0,0,0.18)]"
+						data-animate
+					>
+						<div
+							class="pointer-events-none absolute -right-12 top-0 h-40 w-40 rounded-full bg-[#18b24b]/[0.08] blur-2xl"
+							aria-hidden="true"
+						/>
+						<div class="relative">
+							<span class="font-mono text-xs font-bold text-[#18b24b]/55">{p.n}</span>
+							<p class="mt-5 text-[#18b24b]" aria-hidden="true">
+								<Icon name={p.icon} class="h-8 w-8" />
+							</p>
+							<h3 class="mt-4 text-xl font-bold text-[#2c2c2c]">{p.title}</h3>
+							<p class="mt-3 text-sm leading-relaxed text-[#2c2c2c]/75">{p.text}</p>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

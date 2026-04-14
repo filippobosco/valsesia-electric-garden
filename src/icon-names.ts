@@ -1,0 +1,20 @@
+/** Nomi icone disponibili (SVG stroke, stile Lucide) */
+export type IconName =
+	| "leaf"
+	| "volume-x"
+	| "zap"
+	| "bike"
+	| "shopping-cart"
+	| "wrench"
+	| "truck"
+	| "tag"
+	| "badge-check"
+	| "map"
+	| "users"
+	| "trophy"
+	| "map-pin"
+	| "mail"
+	| "phone"
+	| "circle-green"
+	| "circle-amber"
+	| "circle-red";

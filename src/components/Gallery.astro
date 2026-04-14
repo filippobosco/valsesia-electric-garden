@@ -1,0 +1,157 @@
+---
+/** Desktop: marquee seamless. Mobile: griglia statica (niente animazione). */
+const photos = [
+	{
+		src: "/images/image-storia.jpg",
+		alt: "Moto da cross in azione su pista sterrata — outdoor e sport",
+	},
+	{
+		src: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=1400&q=80&auto=format&fit=crop",
+		alt: "Gruppo di motociclisti su strada panoramica in montagna",
+	},
+	{
+		src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1400&q=80&auto=format&fit=crop",
+		alt: "Lago di montagna e riflessi — scena luminosa all’aperto",
+	},
+	{
+		src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1400&q=80&auto=format&fit=crop",
+		alt: "Sentiero nel bosco — natura e percorsi tra Piemonte e Lombardia",
+	},
+	{
+		src: "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?w=1400&q=80&auto=format&fit=crop",
+		alt: "Alba in montagna — luce calda sulla valle",
+	},
+	{
+		src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80&auto=format&fit=crop",
+		alt: "Mountain bike su sentiero tra prati e cielo aperto",
+	},
+];
+
+const loopA = [...photos, ...photos];
+const photosReversed = [...photos].reverse();
+const loopBDoubled = [...photosReversed, ...photosReversed];
+---
+
+<section id="azioni" class="relative scroll-mt-28 overflow-hidden bg-[#0a0a0a] md:min-h-[100svh]" aria-label="In azione">
+	<!-- Attenua il taglio con la sezione precedente -->
+	<div
+		class="pointer-events-none absolute inset-x-0 top-0 z-20 h-16 bg-gradient-to-b from-[#0a0c0b] to-transparent"
+		aria-hidden="true"
+	>
+	</div>
+
+	<!-- ========== Mobile: griglia fissa, niente marquee ========== -->
+	<div class="relative z-10 md:hidden">
+		<div class="mx-auto max-w-7xl px-5 pt-24 pb-4">
+			<h2 id="azioni-title" class="text-3xl font-bold tracking-tight text-white">
+				In azione
+			</h2>
+			<p class="mt-3 max-w-xl text-base leading-relaxed text-white/80">
+				Sei immagini in griglia: territorio, piste e momenti in sella — niente animazioni, puoi guardarle con calma.
+			</p>
+		</div>
+		<div class="mx-auto max-w-7xl px-5 pb-14">
+			<ul
+				class="grid grid-cols-2 gap-2.5"
+				role="list"
+				aria-label="Galleria fotografica"
+			>
+				{
+					photos.map((photo, i) => (
+						<li class="min-w-0">
+							<figure
+								class="relative aspect-[4/3] overflow-hidden rounded-xl bg-white/[0.04] shadow-lg shadow-black/40 ring-1 ring-white/10"
+							>
+								<img
+									src={photo.src}
+									alt={photo.alt}
+									class="h-full w-full object-cover"
+									loading={i < 2 ? "eager" : "lazy"}
+									decoding="async"
+									width="700"
+									height="525"
+								/>
+								<figcaption class="sr-only">
+									Foto {i + 1} di {photos.length}
+								</figcaption>
+							</figure>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+
+	<!-- ========== Desktop: marquee doppia fila ========== -->
+	<div class="absolute inset-0 hidden flex-col justify-center gap-3 py-14 md:flex">
+		<div class="gallery-marquee-fallback overflow-hidden">
+			<div class="gallery-marquee-track flex gap-4 pr-4">
+				{
+					loopA.map((photo, i) => (
+						<figure
+							class="relative h-[36vh] min-h-[200px] min-w-[min(70vw,480px)] shrink-0 overflow-hidden rounded-xl shadow-2xl shadow-black/40 ring-1 ring-white/10 lg:min-w-[420px]"
+							aria-hidden={i >= photos.length ? true : undefined}
+						>
+							<img
+								src={photo.src}
+								alt={i < photos.length ? photo.alt : ""}
+								class="h-full w-full object-cover"
+								loading={i < photos.length ? "eager" : "lazy"}
+								width="1400"
+								height="933"
+							/>
+						</figure>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="gallery-marquee-fallback overflow-hidden">
+			<div
+				class="gallery-marquee-track gallery-marquee-track--slow gallery-marquee-track--reverse flex gap-4 pr-4"
+			>
+				{
+					loopBDoubled.map((photo, i) => (
+						<figure
+							class="relative h-[36vh] min-h-[200px] min-w-[min(70vw,480px)] shrink-0 overflow-hidden rounded-xl shadow-2xl shadow-black/40 ring-1 ring-white/10 lg:min-w-[420px]"
+							aria-hidden={i >= photosReversed.length ? true : undefined}
+						>
+							<img
+								src={photo.src}
+								alt={i < photosReversed.length ? photo.alt : ""}
+								class="h-full w-full object-cover"
+								loading="lazy"
+								width="1400"
+								height="933"
+							/>
+						</figure>
+					))
+				}
+			</div>
+		</div>
+	</div>
+
+	<div
+		class="pointer-events-none absolute inset-0 z-[1] hidden bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.45)_100%)] md:block"
+		aria-hidden="true"
+	>
+	</div>
+
+	<!-- Titolo desktop (in basso sulla banda): stesso testo visivo, un solo h2 è quello mobile per outline -->
+	<div
+		class="absolute inset-x-0 bottom-0 z-10 hidden bg-gradient-to-t from-black via-black/70 to-transparent px-10 pb-14 pt-36 md:block"
+	>
+		<div class="mx-auto max-w-7xl">
+			<p
+				class="text-4xl font-bold tracking-tight text-white lg:text-5xl"
+				role="heading"
+				aria-level="2"
+			>
+				In azione
+			</p>
+			<p class="mt-3 max-w-xl text-lg leading-relaxed text-white/75">
+				Scorrono in automatico — un assaggio continuo di quello che viviamo in sella, tra Piemonte e Lombardia.
+			</p>
+		</div>
+	</div>
+</section>

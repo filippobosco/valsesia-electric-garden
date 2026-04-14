@@ -1,0 +1,123 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<section
+	id="hero"
+	class="relative -mt-[var(--nav-height)] min-h-[100dvh] overflow-hidden"
+>
+	<div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+		<!-- Preferenza: MP4 (H.264). Fallback: MOV in /videos/ (QuickTime — ok su Safari). -->
+		<video
+			data-hero-video
+			class="pointer-events-none absolute inset-0 h-full w-full object-cover"
+			autoplay
+			muted
+			loop
+			playsinline
+			preload="auto"
+			disablepictureinpicture
+		>
+			<source src="/videos/video_hero.mp4" type="video/mp4" />
+			<source src="/videos/video_hero.mov" type="video/quicktime" />
+		</video>
+	</div>
+	<script is:inline>
+		(function () {
+			var v = document.querySelector("[data-hero-video]");
+			if (!v) return;
+			v.muted = true;
+			var p = v.play && v.play();
+			if (p && typeof p.catch === "function") p.catch(function () {});
+		})();
+	</script>
+	<div
+		class="absolute inset-0 bg-gradient-to-br from-black/75 via-black/45 to-[#0a120d]/90"
+		aria-hidden="true"
+	>
+	</div>
+	<div
+		class="absolute -right-32 top-1/4 h-[min(80vw,520px)] w-[min(80vw,520px)] rounded-full bg-[#18b24b]/15 blur-3xl"
+		aria-hidden="true"
+	>
+	</div>
+
+	<div
+		class="relative z-10 mx-auto flex min-h-[100dvh] max-w-7xl flex-col justify-end px-5 pb-16 pt-[calc(3.25rem+var(--nav-height))] md:px-8 md:pb-24 md:pt-[calc(8rem+var(--nav-height))]"
+	>
+		<p
+			class="mb-6 max-w-xl text-xs font-semibold uppercase tracking-[0.35em] text-white/70 md:mb-8"
+			data-animate
+		>
+			Piemonte · Lombardia · Valsesia
+		</p>
+		<h1
+			class="max-w-4xl text-balance font-extrabold leading-[1.05] tracking-tight text-white text-[clamp(2.25rem,6vw,4.25rem)]"
+			data-animate
+		>
+			Esplora la natura.<br />
+			<span class="text-white/95">In silenzio.</span>
+		</h1>
+		<p
+			class="mt-6 max-w-2xl text-lg font-light leading-relaxed text-white/88 md:text-xl"
+			data-animate
+		>
+			Tour guidati, noleggio e vendita di moto elettriche tra le montagne del Piemonte e della Lombardia, con
+			professionalità e rispetto per l’ambiente.
+		</p>
+
+		<div class="mt-10 flex flex-wrap gap-3 md:mt-12" data-animate>
+			<span
+				class="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white/95 backdrop-blur-sm"
+			>
+				<Icon name="leaf" class="h-4 w-4 text-emerald-300/95" /> Zero emissioni
+			</span>
+			<span
+				class="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white/95 backdrop-blur-sm"
+			>
+				<Icon name="volume-x" class="h-4 w-4 text-slate-200/95" /> Silenziose
+			</span>
+			<span
+				class="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white/95 backdrop-blur-sm"
+			>
+				<Icon name="zap" class="h-4 w-4 text-amber-200/95" /> Elettriche
+			</span>
+		</div>
+
+		<div
+			class="mt-12 grid w-full max-w-md grid-cols-2 gap-3 sm:max-w-lg sm:gap-4 md:mt-14"
+			data-animate
+		>
+			<a
+				href="#offerta"
+				class="flex min-h-[3.25rem] w-full items-center justify-center rounded-full border-2 border-transparent bg-[#18b24b] px-2 py-3 text-center text-xs font-semibold leading-tight text-white shadow-lg shadow-[#18b24b]/30 transition hover:bg-[#0e7a30] hover:shadow-xl sm:min-h-[3.5rem] sm:px-4 sm:text-sm"
+			>
+				Sede & esperienze
+			</a>
+			<a
+				href="#azioni"
+				class="flex min-h-[3.25rem] w-full items-center justify-center rounded-full border-2 border-white/90 bg-transparent px-2 py-3 text-center text-xs font-semibold leading-tight text-white transition hover:bg-white hover:text-[#2c2c2c] sm:min-h-[3.5rem] sm:px-4 sm:text-sm"
+			>
+				Vedi la galleria
+			</a>
+		</div>
+
+		<div
+			class="mt-16 grid max-w-3xl grid-cols-1 gap-y-5 border-t border-white/15 pt-8 sm:grid-cols-3 sm:gap-x-4 sm:gap-y-6 md:mt-20 md:gap-x-10"
+			data-animate
+		>
+			<div class="min-w-0 sm:text-left">
+				<p class="text-2xl font-bold leading-tight text-white md:text-3xl">360°</p>
+				<p class="mt-1 text-xs font-medium uppercase tracking-wider text-white/55">Attività completa</p>
+			</div>
+			<div class="min-w-0 sm:text-left">
+				<p class="text-2xl font-bold leading-tight text-white md:text-3xl">Talaria</p>
+				<p class="mt-1 text-xs font-medium uppercase tracking-wider text-white/55">Partner ufficiale</p>
+			</div>
+			<div class="min-w-0 sm:text-left">
+				<p class="text-2xl font-bold leading-tight text-white md:text-3xl">Borgosesia</p>
+				<p class="mt-1 text-xs font-medium uppercase tracking-wider text-white/55">Base escursioni</p>
+			</div>
+		</div>
+	</div>
+</section>

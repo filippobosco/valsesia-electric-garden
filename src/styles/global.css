@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+	--nav-height: 4.5rem;
+	--color-brand-green: #18b24b;
+	--color-brand-green-dark: #0e7a30;
+	--color-brand-dark: #2c2c2c;
+	--color-brand-forest: #122017;
+	--color-brand-cream: #f7f5f2;
+	--font-family-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+	body {
+		@apply bg-brand-cream text-brand-dark antialiased;
+	}
+}
+
+/* Galleria full-screen: scorrimento orizzontale continuo */
+@keyframes gallery-marquee {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+@layer components {
+	.gallery-marquee-track {
+		display: flex;
+		width: max-content;
+		animation: gallery-marquee 65s linear infinite;
+		will-change: transform;
+	}
+
+	.gallery-marquee-track--slow {
+		animation-duration: 85s;
+	}
+
+	.gallery-marquee-track--reverse {
+		animation-direction: reverse;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.gallery-marquee-track {
+			animation: none;
+		}
+
+		.gallery-marquee-fallback {
+			overflow-x: auto;
+			overflow-y: hidden;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-gutter: stable;
+		}
+	}
+
+	/* Navbar: trasparente sopra #hero, stile cream dopo */
+	#main-nav[data-nav-state="hero"] {
+		@apply border-transparent bg-transparent shadow-none backdrop-blur-none;
+	}
+
+	#main-nav[data-nav-state="solid"] {
+		@apply border-[#2c2c2c]/8 bg-brand-cream shadow-[0_8px_30px_-12px_rgba(0,0,0,0.12)];
+	}
+
+	#main-nav[data-nav-state="hero"] .nav-link {
+		@apply text-white/90 hover:bg-white/10 hover:text-white;
+	}
+
+	#main-nav[data-nav-state="solid"] .nav-link {
+		@apply text-[#2c2c2c]/85 hover:bg-[#18b24b]/10 hover:text-[#18b24b];
+	}
+
+	#main-nav[data-nav-state="hero"] #nav-menu {
+		@apply border-white/25 bg-white/[0.12] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.35)] backdrop-blur-2xl backdrop-saturate-150 md:border-transparent md:bg-transparent md:shadow-none md:backdrop-blur-none md:backdrop-saturate-100;
+	}
+
+	#main-nav[data-nav-state="solid"] #nav-menu {
+		@apply border-[#2c2c2c]/12 bg-brand-cream shadow-xl md:border-transparent md:bg-transparent md:shadow-none;
+	}
+
+	#main-nav[data-nav-state="hero"] #nav-toggle {
+		@apply border-white/25 bg-white/10 text-white;
+	}
+
+	#main-nav[data-nav-state="solid"] #nav-toggle {
+		@apply border-[#2c2c2c]/10 bg-brand-cream text-[#2c2c2c];
+	}
+
+	/* Logo: bianco sopra hero, verde dopo (come sfondo nav) */
+	#main-nav .nav-logo-img {
+		@apply transition-opacity duration-300;
+	}
+
+	#main-nav[data-nav-state="hero"] .nav-logo-img--hero {
+		@apply relative z-[1] opacity-100;
+	}
+
+	#main-nav[data-nav-state="hero"] .nav-logo-img--solid {
+		@apply pointer-events-none opacity-0;
+	}
+
+	#main-nav[data-nav-state="hero"] .group:hover .nav-logo-img--hero {
+		@apply opacity-90;
+	}
+
+	#main-nav[data-nav-state="solid"] .nav-logo-img--hero {
+		@apply pointer-events-none opacity-0;
+	}
+
+	#main-nav[data-nav-state="solid"] .nav-logo-img--solid {
+		@apply z-[1] opacity-100;
+	}
+
+	#main-nav[data-nav-state="solid"] .group:hover .nav-logo-img--solid {
+		@apply opacity-90;
+	}
+}

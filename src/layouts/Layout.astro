@@ -1,0 +1,65 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+	title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="it">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/images/logo_verde.png" type="image/png" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+		<meta
+			name="description"
+			content="Valsesia Electric Green – Tour guidati e noleggio moto elettriche in Piemonte e Lombardia. Partner ufficiale Talaria Italia."
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body class="font-poppins">
+		<div
+			class="pointer-events-none fixed inset-0 z-[100] opacity-[0.035]"
+			aria-hidden="true"
+			style="background-image: url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\");"
+		>
+		</div>
+		<slot />
+		<script is:inline>
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add("animate-in");
+							observer.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+			);
+			document.querySelectorAll("[data-animate]").forEach((el) => observer.observe(el));
+		</script>
+		<style is:global>
+			[data-animate] {
+				opacity: 0;
+				transform: translateY(28px);
+				transition:
+					opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+					transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+			}
+			[data-animate].animate-in {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		</style>
+	</body>
+</html>

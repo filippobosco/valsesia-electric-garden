@@ -1,0 +1,236 @@
+---
+import Icon from "./Icon.astro";
+import type { IconName } from "../icon-names";
+
+const sede: { icon: IconName; title: string; text: string }[] = [
+	{ icon: "bike", title: "Noleggio", text: "Moto elettriche per uso personale o pratica" },
+	{ icon: "shopping-cart", title: "Vendita", text: "Gamma selezionata, con consulenza dedicata" },
+	{ icon: "wrench", title: "Assistenza e riparazione", text: "Officina attrezzata, tecnici certificati" },
+	{ icon: "truck", title: "Officina mobile", text: "Interventi fuori sede, dove sei tu" },
+	{ icon: "tag", title: "Rivenditori Talaria Italia", text: "Assistenza e ricambi originali" },
+];
+
+const outdoor: { icon: IconName; title: string; text: string }[] = [
+	{ icon: "map", title: "Tour guidati", text: "Percorsi in Valsesia con guida esperta" },
+	{ icon: "users", title: "Famiglie e ragazzi", text: "Da 14 anni con patente ciclomotore" },
+	{ icon: "bike", title: "Noleggio libero", text: "Autonomia su percorsi dedicati" },
+	{ icon: "trophy", title: "Gare ufficiali", text: "In collaborazione con la federazione ufficiale" },
+];
+---
+
+<section id="offerta" class="scroll-mt-28 py-24 md:py-32">
+	<div class="mx-auto max-w-7xl px-5 md:px-8">
+		<div class="mx-auto max-w-3xl text-center" data-animate>
+			<p class="text-xs font-semibold uppercase tracking-[0.3em] text-[#18b24b]">Cosa facciamo</p>
+			<h2 class="mt-4 text-balance text-3xl font-bold tracking-tight text-[#2c2c2c] md:text-4xl">
+				Due mondi, un’unica filosofia
+			</h2>
+			<p class="mt-5 text-lg leading-relaxed text-[#2c2c2c]/78">
+				In sede ti seguiamo su noleggio, vendita e assistenza. Fuori porta ti portiamo in montagna — con tour, libertà
+				sui sentieri e la sicurezza di chi conosce ogni curva della Valsesia.
+			</p>
+		</div>
+
+		<div class="mt-14 md:mt-14" data-animate>
+			<div
+				id="offerta-carousel"
+				class="offerta-carousel-track -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-1 [scrollbar-width:none] [-ms-overflow-style:none] md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:gap-8 [&::-webkit-scrollbar]:hidden"
+				role="region"
+				aria-roledescription="carousel"
+				aria-label="In sede e Outdoor"
+				tabindex="0"
+			>
+			<!-- In sede -->
+			<div
+				id="offerta-slide-sede"
+				class="offerta-slide group relative flex-[0_0_100%] snap-center overflow-hidden rounded-2xl bg-white p-6 shadow-[0_25px_60px_-30px_rgba(0,0,0,0.18)] ring-1 ring-black/[0.06] sm:rounded-[2rem] sm:p-8 md:min-w-0 md:flex-none md:snap-none md:p-10"
+				role="group"
+				aria-roledescription="slide"
+				aria-label="1 di 2: In sede"
+			>
+				<div
+					class="pointer-events-none absolute -right-16 top-0 h-48 w-48 rounded-full bg-[#18b24b]/[0.07] blur-2xl transition group-hover:bg-[#18b24b]/10"
+					aria-hidden="true"
+				>
+				</div>
+				<div class="relative">
+					<div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+						<div class="min-w-0">
+							<p class="text-xs font-bold uppercase tracking-[0.2em] text-[#2c2c2c]/45">
+								In sede
+							</p>
+							<h3 class="mt-2 text-xl font-bold leading-snug text-[#2c2c2c] md:text-2xl">
+								Servizi & officina
+							</h3>
+						</div>
+						<span
+							class="w-fit shrink-0 rounded-full bg-[#18b24b]/10 px-3 py-1 text-xs font-semibold text-[#0e7a30]"
+						>
+							Borgosesia
+						</span>
+					</div>
+					<p class="mt-4 text-sm leading-relaxed text-[#2c2c2c]/72">
+						Tutto quello che ti serve in un unico posto: dalla prova in sella all’assistenza certificata.
+					</p>
+					<ul class="mt-8 space-y-0 divide-y divide-[#2c2c2c]/[0.08] md:mt-10">
+						{
+							sede.map((item) => (
+								<li class="flex gap-4 py-5 first:pt-0">
+									<span class="mt-0.5 shrink-0 text-[#18b24b]" aria-hidden="true">
+										<Icon name={item.icon} class="h-5 w-5" />
+									</span>
+									<div class="min-w-0">
+										<p class="text-base font-semibold leading-tight text-[#2c2c2c]">{item.title}</p>
+										<p class="mt-1 text-sm leading-relaxed text-[#2c2c2c]/72">
+											{item.text}
+										</p>
+									</div>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+
+			<!-- Outdoor -->
+			<div
+				id="offerta-slide-outdoor"
+				class="offerta-slide relative flex-[0_0_100%] snap-center overflow-hidden rounded-2xl bg-brand-forest p-6 text-white shadow-2xl shadow-black/25 sm:rounded-[2rem] sm:p-8 md:min-w-0 md:flex-none md:snap-none md:p-10"
+				role="group"
+				aria-roledescription="slide"
+				aria-label="2 di 2: Outdoor"
+			>
+				<div
+					class="pointer-events-none absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay"
+					aria-hidden="true"
+				>
+				</div>
+				<div class="absolute inset-0 bg-gradient-to-br from-brand-forest via-brand-forest/95 to-[#0a120d]" aria-hidden="true">
+				</div>
+
+				<div class="relative">
+					<div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-4">
+						<div class="min-w-0">
+							<p class="text-xs font-bold uppercase tracking-[0.2em] text-white/50">
+								Outdoor
+							</p>
+							<h3 class="mt-2 text-xl font-bold leading-snug md:text-2xl">
+								Valsesia & avventura
+							</h3>
+						</div>
+						<span
+							class="w-fit shrink-0 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white/90"
+							>Partenza Borgosesia</span
+						>
+					</div>
+					<p class="mt-4 text-sm leading-relaxed text-white/82 sm:mt-5 sm:text-base">
+						Vivi l’esperienza, non solo il percorso: tour guidati nelle montagne della Valsesia, per adulti e
+						ragazzi da 14 anni (con patente ciclomotore).
+					</p>
+
+					<div class="mt-8 grid grid-cols-1 gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4">
+						{
+							outdoor.map((item) => (
+								<div class="rounded-xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm transition hover:bg-white/[0.09] sm:rounded-2xl sm:p-5">
+									<span class="inline-flex text-emerald-300/95" aria-hidden="true">
+										<Icon name={item.icon} class="h-5 w-5" />
+									</span>
+									<p class="mt-3 text-base font-semibold leading-tight">{item.title}</p>
+									<p class="mt-1 text-sm leading-relaxed text-white/75 sm:mt-2">
+										{item.text}
+									</p>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</div>
+			</div>
+
+			<nav class="mt-5 flex justify-center gap-2 md:hidden" aria-label="Scorri le offerte">
+				<button
+					type="button"
+					class="offerta-dot h-2 w-8 rounded-full bg-[#18b24b] transition-[width,background-color] duration-300"
+					data-offerta-dot="0"
+					aria-current="true"
+					aria-controls="offerta-slide-sede"
+					id="offerta-tab-sede"
+					aria-label="In sede"
+				>
+				</button>
+				<button
+					type="button"
+					class="offerta-dot h-2 w-2 rounded-full bg-[#2c2c2c]/20 transition-[width,background-color] duration-300"
+					data-offerta-dot="1"
+					aria-current="false"
+					aria-controls="offerta-slide-outdoor"
+					id="offerta-tab-outdoor"
+					aria-label="Outdoor"
+				>
+				</button>
+			</nav>
+		</div>
+	</div>
+</section>
+
+<script>
+	let offertaCarouselIo = null;
+	let offertaListenersAbort = null;
+
+	function initOffertaCarousel() {
+		const track = document.getElementById("offerta-carousel");
+		const slides = document.querySelectorAll(".offerta-slide");
+		const dots = document.querySelectorAll(".offerta-dot");
+		if (!track || slides.length < 2 || dots.length < 2) return;
+
+		if (offertaListenersAbort) offertaListenersAbort.abort();
+		offertaListenersAbort = new AbortController();
+		const { signal } = offertaListenersAbort;
+
+		if (offertaCarouselIo) {
+			offertaCarouselIo.disconnect();
+			offertaCarouselIo = null;
+		}
+
+		const active = "bg-[#18b24b]";
+		const inactive = "bg-[#2c2c2c]/20";
+		const activeWide = "w-8";
+		const inactiveNarrow = "w-2";
+
+		function setActive(index) {
+			dots.forEach((dot, i) => {
+				const on = i === index;
+				dot.setAttribute("aria-current", on ? "true" : "false");
+				dot.classList.toggle(activeWide, on);
+				dot.classList.toggle(inactiveNarrow, !on);
+				dot.classList.toggle(active, on);
+				dot.classList.toggle(inactive, !on);
+			});
+		}
+
+		offertaCarouselIo = new IntersectionObserver(
+			(entries) => {
+				for (const e of entries) {
+					if (!e.isIntersecting) continue;
+					const idx = Array.from(slides).indexOf(e.target);
+					if (idx >= 0) setActive(idx);
+				}
+			},
+			{ root: track, threshold: 0.55 },
+		);
+		slides.forEach((s) => offertaCarouselIo.observe(s));
+
+		dots.forEach((dot, i) => {
+			dot.addEventListener(
+				"click",
+				() => {
+					slides[i]?.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
+				},
+				{ signal },
+			);
+		});
+	}
+
+	initOffertaCarousel();
+	document.addEventListener("astro:page-load", initOffertaCarousel);
+</script>
